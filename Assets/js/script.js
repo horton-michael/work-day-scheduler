@@ -3,9 +3,12 @@
 // in the html.
 // DOM ELEMENTS ---------------------------------------------------------------
 var currentDayEl = $("#currentDay");
+var timeBlocksEl = $(".time-block");
 
 // DATA ----------------------------------------------------------------------
-today = dayjs().format("dddd, MMMM D");
+var today = dayjs().format("dddd, MMMM D");
+var currentTime = dayjs().hour();
+console.log(currentTime);
 // FUNCTIONS -----------------------------------------------------------------
 
 $(function () {
@@ -15,12 +18,21 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+
+  // create conditional statement within for loop to determine if the time is past, present, or future
+  for (var i = 9; i <= 17; i++) {
+    var timeBlockEl = $("#hour-" + i);
+    if (currentTime > i) {
+      // if the time is past, add class "past"
+      timeBlockEl.addClass("past").removeClass("present future");
+    } else if (currentTime == i) {
+      // if the time is present, add class "present"
+      timeBlockEl.addClass("present").removeClass("past future");
+    } else if (currentTime < i) {
+      // if the time is future, add class "future"
+      timeBlockEl.addClass("future").removeClass("past present");
+    }
+  }
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
