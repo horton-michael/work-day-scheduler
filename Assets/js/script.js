@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 // DOM ELEMENTS ---------------------------------------------------------------
 var currentDayEl = $("#currentDay");
 var timeBlocksEl = $(".time-block");
@@ -11,23 +8,13 @@ var today = dayjs().format("dddd, MMMM D");
 var currentTime = dayjs().hour();
 // FUNCTIONS -----------------------------------------------------------------
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  // function renderLastRegistered() {
-  //   var textInput = descriptionEl.val();
-  //   var timeBlockValue = localStorage.getItem("hour-" + i);
-
   function renderLastRegistered() {
     for (var i = 9; i <= 17; i++) {
       var timeBlockValue = localStorage.getItem("hour-" + i);
       var descriptionEl = $("#hour-" + i).find(".description");
 
       if (timeBlockValue) {
-        descriptionEl.val(timeBlockValue); // This sets the value of the description element
+        descriptionEl.val(timeBlockValue);
       }
     }
   }
@@ -58,15 +45,6 @@ $(function () {
       timeBlockEl.addClass("future").removeClass("past present");
     }
   }
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-
-  // TODO: Add code to display the current date in the header of the page.
   currentDayEl.text(today);
   renderLastRegistered();
 });
-// USER INTERACTIONS ---------------------------------------------------------
-
-// INITIALIZATION -------------------------------------------------------------
